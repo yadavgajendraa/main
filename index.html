@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gajendra Yadav | Structural Health Monitoring, IIT Mandi</title>
+<meta name="description" content="Research scholar at IIT Mandi working on vibration-based structural health monitoring, stochastic subspace system identification and physics-informed neural networks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfbf9; --ink:#171a21; --muted:#5d6472; --rule:#dcdfe5; --accent:#2a5ba8; --accent2:#b5532f; --panel:#f2f3f6;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --sans:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#14171d;--ink:#e8eaee;--muted:#9aa2b1;--rule:#2b303a;--accent:#7fa7e6;--accent2:#e2906b;--panel:#1b1f27;color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#14171d;--ink:#e8eaee;--muted:#9aa2b1;--rule:#2b303a;--accent:#7fa7e6;--accent2:#e2906b;--panel:#1b1f27;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.65 var(--serif);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+
+/* progress + nav */
+#progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:30}
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:center;gap:22px;height:52px;font:500 14px var(--sans);overflow-x:auto;white-space:nowrap}
+nav a{color:var(--muted);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent}
+nav a:hover{color:var(--ink)}
+nav a.on{color:var(--ink);border-bottom-color:var(--accent)}
+nav .sp{flex:1}
+#theme{background:none;border:1px solid var(--rule);color:var(--muted);border-radius:6px;padding:4px 10px;font:500 13px var(--sans);cursor:pointer}
+#theme:hover{color:var(--ink)}
+
+/* hero */
+header.hero{padding:64px 0 24px}
+h1{font-size:clamp(2.4rem,6vw,3.6rem);line-height:1.05;margin:0 0 10px;font-weight:600;letter-spacing:-.02em}
+.tag{font-size:1.2rem;color:var(--muted);margin:0 0 6px;min-height:1.7em}
+.tag .caret{display:inline-block;width:2px;height:1.05em;background:var(--accent);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.links{display:flex;flex-wrap:wrap;gap:8px 20px;font:500 15px var(--sans);margin:18px 0 0}
+.stage{margin-top:30px;border:1px solid var(--rule);background:var(--panel);border-radius:8px;padding:10px 10px 12px}
+canvas{display:block;width:100%}
+#bridge{height:230px}
+.ctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font:14px var(--sans);color:var(--muted);padding:6px 6px 0}
+.ctl button{font:500 13px var(--sans);background:transparent;color:var(--muted);border:1px solid var(--rule);border-radius:6px;padding:4px 12px;cursor:pointer}
+.ctl button:hover{color:var(--ink)}
+.ctl button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.ctl .note{margin-left:auto;font-size:13px}
+
+/* sections */
+section{padding:48px 0 8px}
+h2{font-size:1.5rem;font-weight:600;margin:0 0 18px;padding-bottom:8px;border-bottom:1px solid var(--rule);letter-spacing:-.01em}
+h3{font-size:1.05rem;margin:0;font-weight:600}
+p{margin:0 0 14px}
+.muted{color:var(--muted)}
+.item{margin:0 0 22px}
+.row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline}
+.when{font:14px var(--sans);color:var(--muted);white-space:nowrap}
+.item ul{margin:6px 0 0;padding-left:20px}
+.item li{margin:3px 0}
+.pubs{list-style:none;padding:0;margin:0}
+.pubs li{margin:0 0 16px;padding-left:16px;border-left:2px solid var(--rule);transition:border-color .2s}
+.pubs li:hover{border-color:var(--accent)}
+.skills{display:grid;grid-template-columns:170px 1fr;gap:10px 20px}
+.skills dt{font:500 14px var(--sans);color:var(--muted);padding-top:3px}
+.skills dd{margin:0}
+@media(max-width:640px){.skills{grid-template-columns:1fr;gap:2px}.skills dd{margin-bottom:12px}body{font-size:17px}}
+.lg{display:flex;gap:18px;font:13px var(--sans);color:var(--muted);padding:6px 6px 0;flex-wrap:wrap}
+.lg i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:6px;border-radius:2px}
+#loss{height:260px}
+footer{padding:40px 0 60px;color:var(--muted);font:14px var(--sans);border-top:1px solid var(--rule);margin-top:40px}
+
+/* scroll reveal: only the list rows, once */
+.rv{opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}.caret{animation:none}}
+
+/* FEM demo */
+input[type=range]{accent-color:var(--accent);width:150px;vertical-align:middle}
+.ctl label{display:inline-flex;align-items:center;gap:8px}
+.ctl output{min-width:3.2em}
+#fem{height:240px;cursor:pointer}
+#hi{height:200px;margin-top:6px}
+.badge{font:500 13px var(--sans);border:1px solid var(--accent);color:var(--accent);border-radius:999px;padding:3px 12px;margin-left:auto}
+.badge.alert{background:var(--accent2);border-color:var(--accent2);color:var(--bg)}
+.badge.pulse{animation:pulse .9s ease-out 1}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent2) 60%,transparent)}100%{box-shadow:0 0 0 14px transparent}}
+.read{display:grid;grid-template-columns:repeat(4,auto);gap:2px 22px;font:14px var(--sans);padding:10px 8px 2px;justify-content:start}
+.read b{font-weight:500;color:var(--muted)}
+.read .lo{color:var(--accent2);font-weight:600}
+#insight{font:14px var(--sans);color:var(--muted);padding:6px 8px 0;margin:0}
+@media(max-width:640px){input[type=range]{width:110px}}
+@media(prefers-reduced-motion:reduce){.badge.pulse{animation:none}}
+.vid{position:relative;aspect-ratio:16/9;width:100%;border-radius:8px;overflow:hidden;background:var(--panel);border:1px solid var(--rule)}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+#acc{height:150px;margin-top:8px}
+#spec{height:170px;margin-top:6px}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<nav aria-label="Sections">
+  <div class="wrap">
+    <a href="#top">Home</a><a href="#research">Research</a><a href="#demo">Demo</a><a href="#videos" id="navvid" hidden>Videos</a><a href="#publications">Publications</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+    <span class="sp"></span>
+    <button id="theme" type="button" aria-label="Toggle dark mode">Dark</button>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+<header class="hero">
+  <h1>Gajendra Yadav</h1>
+  <p class="tag"><span id="typed"></span><span class="caret" aria-hidden="true"></span></p>
+  <p class="muted">Research scholar at the Indian Institute of Technology Mandi, working with the i4s team on vibration-based monitoring of bridges.</p>
+  <div class="links">
+    <a href="mailto:gajendra36912@gmail.com">gajendra36912@gmail.com</a>
+    <a href="https://scholar.google.com/citations?user=2gER8X8AAAAJ">Google Scholar</a>
+    <a href="https://www.linkedin.com/in/gajendra-yadav-b227191a7/">LinkedIn</a>
+  </div>
+
+  <div class="stage">
+    <canvas id="bridge" role="img" aria-label="Animated vibration mode shapes of a three-span bridge deck"></canvas>
+    <div class="ctl" role="group" aria-label="Choose a mode shape">
+      <button type="button" data-m="1" aria-pressed="true">Mode 1</button>
+      <button type="button" data-m="2" aria-pressed="false">Mode 2</button>
+      <button type="button" data-m="3" aria-pressed="false">Mode 3</button>
+      <button type="button" data-m="4" aria-pressed="false">Mode 4</button>
+      <span class="note">Illustrative 25 m + 27 m + 25 m deck, amplitude exaggerated</span>
+    </div>
+  </div>
+</header>
+
+<section id="research">
+  <h2>Research</h2>
+  <p>I study how to detect and quantify physical changes in structures from their measured vibrations. My work combines stochastic subspace system identification (SSI) of operational data with physics-informed neural networks (PINNs), so that identified modal parameters can be tied back to physical quantities such as stiffness and mass.</p>
+  <p>Current threads: hybrid PINN-based parameter identification, physics-aware networks coupled with SSI, and turning shifts in identified modal parameters into damage indicators for bridges.</p>
+  <div class="stage">
+    <canvas id="loss" role="img" aria-label="Illustrative PINN training loss curves falling over epochs"></canvas>
+    <div class="lg"><span><i style="background:var(--accent)"></i>Total loss</span><span><i style="background:var(--accent2)"></i>Data loss</span><span><i style="background:var(--muted)"></i>Physics residual</span></div>
+    <div class="ctl"><button type="button" id="replay">Replay training</button><span class="note">Illustrative curves, not results from my experiments</span></div>
+  </div>
+</section>
+
+<section id="demo">
+  <h2>Demo: from damage to alarm</h2>
+  <p>A finite element model of a simply supported girder (20 beam elements). Damage is a local loss of bending stiffness. It lowers the natural frequencies, and the ratio of damaged to healthy frequency is the health index of each mode. When an index falls below 0.98, the monitor raises an alert. Click the girder to move the damage, then press Drive vehicle across: a moving load crosses the span, an accelerometer at the sensor (choose its position with the slider) records the response, and the frequencies are picked from its spectrum. The health index below comes from that simulated measurement.</p>
+  <div class="stage">
+    <canvas id="fem" role="img" aria-label="Finite element girder vibrating in a chosen mode, with a stiffness map showing the damaged elements"></canvas>
+    <div class="ctl" role="group" aria-label="Mode to display">
+      <button type="button" data-fm="1" aria-pressed="true">Mode 1</button>
+      <button type="button" data-fm="2" aria-pressed="false">Mode 2</button>
+      <button type="button" data-fm="3" aria-pressed="false">Mode 3</button>
+      <span class="badge" id="badge" role="status">Healthy</span>
+    </div>
+    <div class="ctl">
+      <label>Location <input id="loc" type="range" min="1" max="18" value="10"></label>
+      <label>Stiffness loss <input id="sev" type="range" min="0" max="60" value="0"><output id="sevo">0 %</output></label>
+      <button type="button" id="run">Run progression</button>
+      <button type="button" id="rst">Reset</button>
+    </div>
+    <div class="ctl">
+      <label>Vehicle speed <input id="spd" type="range" min="5" max="30" value="15"><output id="spdo">15 m/s</output></label>
+      <label>Sensor position <input id="snr" type="range" min="1" max="19" value="5"><output id="snro">7.5 m</output></label>
+      <button type="button" id="drive">Drive vehicle across</button>
+      <label><input id="noise" type="checkbox"> Sensor noise (1 % of peak)</label>
+    </div>
+    <canvas id="acc" role="img" aria-label="Simulated acceleration record at the sensor while a vehicle crosses the girder"></canvas>
+    <canvas id="spec" role="img" aria-label="Spectrum of the acceleration record around the selected mode, baseline against current"></canvas>
+    <canvas id="hi" role="img" aria-label="Health index of modes 1 to 3 against stiffness loss, with the alert threshold"></canvas>
+    <div class="lg"><span><i style="background:var(--accent)"></i>Mode 1</span><span><i style="background:var(--accent2)"></i>Mode 2</span><span><i style="background:var(--muted)"></i>Mode 3</span><span>Curves: exact model. Dots: identified from the vehicle-pass record.</span></div>
+    <div class="read" id="read"></div>
+    <p id="insight"></p>
+  </div>
+</section>
+
+<section id="videos" hidden>
+  <h2>Videos</h2>
+  <p>Talks, demos and explainers from my YouTube channel. Use the playlist button inside the player to pick a video.</p>
+  <div class="vid" id="vidbox" aria-live="polite"></div>
+  <p style="margin-top:12px"><a id="vidlink" href="#" target="_blank" rel="noopener">Open the channel on YouTube</a></p>
+</section>
+
+<section id="publications">
+  <h2>Publications</h2>
+  <ul class="pubs">
+    <li class="rv">N. Mahar, <strong>G. Yadav</strong>, K. Thakur, S. Sen. Structural parameter identification with hybrid physics-informed neural network. <em>12th European Workshop on Structural Health Monitoring (EWSHM 2026)</em>, Toulouse, France.</li>
+    <li class="rv">K. Thakur, N. Mahar, <strong>G. Yadav</strong>, S. Sen. Cycle-consistent framework for mooring tension prediction in floating offshore wind turbines. <em>EWSHM 2026</em>, Toulouse, France.</li>
+    <li class="rv">N. Mahar, N. Yadav, <strong>G. Yadav</strong>, S. Sen, L. Mevel. Physics-aware neural network integrated with stochastic subspace identification for quantification of physical changes. <em>11th International Operational Modal Analysis Conference (IOMAC)</em>, France, 2025.</li>
+  </ul>
+  <p><a href="https://scholar.google.com/citations?user=2gER8X8AAAAJ">Full list on Google Scholar</a></p>
+</section>
+
+<section id="experience">
+  <h2>Experience</h2>
+  <div class="item rv">
+    <div class="row"><h3>Research Assistant, on-site bridge vibration testing and NDT</h3><span class="when">Feb 2025</span></div>
+    <div class="muted">Satluj Jal Vidyut Nigam Limited (SJVNL), Rampur, HP</div>
+    <ul>
+      <li>Ran ambient vibration tests on a 120 m bridge with 12 wireless sensor nodes and a Dewesoft DAQ to record operational accelerations for modal identification.</li>
+      <li>Carried out rebound hammer testing and half-cell corrosion mapping to assess in-situ concrete strength and reinforcement condition.</li>
+    </ul>
+  </div>
+  <div class="item rv">
+    <div class="row"><h3>Structural Design Intern</h3><span class="when">Jun – Jul 2023</span></div>
+    <div class="muted">MP Housing &amp; Infrastructure Development Board, Guna, MP</div>
+    <ul><li>Checked structural layouts of a hospital wing for seismic compliance under IS 1893 (Part 1): 2016.</li></ul>
+  </div>
+  <div class="item rv">
+    <div class="row"><h3>Building Design Intern</h3><span class="when">Feb – Mar 2022</span></div>
+    <div class="muted">Dev Shree Construction, Sagar, MP</div>
+    <ul>
+      <li>Drew 2D plans and 3D structural models for G+2 residential projects in AutoCAD.</li>
+      <li>Worked with site engineers to keep as-built structures consistent with design.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="education">
+  <h2>Education</h2>
+  <div class="item rv">
+    <div class="row"><h3>Indian Institute of Technology Mandi</h3><span class="when">2024 – present</span></div>
+    <div class="muted">M.Tech (Research) in Structural Engineering, CGPA 7.7</div>
+  </div>
+  <div class="item rv">
+    <div class="row"><h3>Jabalpur Engineering College</h3><span class="when">2020 – 2024</span></div>
+    <div class="muted">B.Tech in Civil Engineering, CGPA 7.86</div>
+    <ul><li>Coursework: structural dynamics, finite element methods, structural analysis, probability and statistics, seismic design.</li></ul>
+  </div>
+  <div class="item rv">
+    <h3>Credentials</h3>
+    <ul>
+      <li>GATE 2024 qualified, Civil Engineering</li>
+      <li>Mastering Bitumen for Roads, École des Ponts ParisTech (Coursera)</li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="item rv">
+    <h3>Design and analysis of a 77 m balanced cantilever RC bridge</h3>
+    <ul>
+      <li>Modelled a three-span (25 m, 27 m, 25 m) RC bridge in CSiBridge and checked it under IRC Class AA tracked vehicle loading.</li>
+      <li>Extracted natural frequencies and mode shapes to set a baseline dynamic signature for future health monitoring.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <dl class="skills rv">
+    <dt>Modelling</dt><dd>Abaqus, CSiBridge, MATLAB, AutoCAD</dd>
+    <dt>Data science and AI</dt><dd>Python, PyTorch (PINNs), NumPy, SciPy, filtering, FFT, PSD estimation</dd>
+    <dt>Structural dynamics</dt><dd>SSI-COV and SSI-DATA, experimental and operational modal analysis, bridge modal analysis</dd>
+    <dt>Experimental</dt><dd>Dewesoft DAQ, LORD wireless sensor nodes, piezoelectric accelerometers, strain gauges, sensor placement</dd>
+    <dt>Testing (NDT)</dt><dd>Rebound hammer, half-cell potential corrosion mapping</dd>
+  </dl>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>For collaborations or questions about my work, write to <a href="mailto:gajendra36912@gmail.com">gajendra36912@gmail.com</a>.</p>
+</section>
+</main>
+
+<footer><div class="wrap">© <span id="yr"></span> Gajendra Yadav. IIT Mandi.</div></footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var root = document.documentElement;
+  function css(n){return getComputedStyle(root).getPropertyValue(n).trim()}
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  /* theme toggle */
+  var tb = document.getElementById("theme");
+  function isDark(){return root.dataset.theme ? root.dataset.theme==="dark" : window.matchMedia("(prefers-color-scheme: dark)").matches}
+  function label(){tb.textContent = isDark() ? "Light" : "Dark"}
+  tb.onclick = function(){root.dataset.theme = isDark() ? "light" : "dark"; label()};
+  label();
+
+  /* typing tagline */
+  var phrases = ["Structural health monitoring","Stochastic subspace system identification","Physics-informed neural networks","Bridge modal analysis"];
+  var el = document.getElementById("typed"), pi = 0, ci = 0, del = false;
+  if (reduce){ el.textContent = phrases[0]; }
+  else (function tick(){
+    var p = phrases[pi];
+    ci += del ? -1 : 1;
+    el.textContent = p.slice(0,ci);
+    var d = del ? 28 : 65;
+    if(!del && ci===p.length){del=true; d=1600}
+    else if(del && ci===0){del=false; pi=(pi+1)%phrases.length; d=350}
+    setTimeout(tick,d);
+  })();
+
+  /* scroll progress + active nav */
+  var bar = document.getElementById("progress");
+  addEventListener("scroll",function(){
+    var h = document.documentElement;
+    bar.style.width = (h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%";
+  },{passive:true});
+  var links = [].slice.call(document.querySelectorAll("nav a"));
+  var secs = links.map(function(a){return document.querySelector(a.getAttribute("href"))});
+  var so = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){
+      links.forEach(function(a){a.classList.toggle("on", a.getAttribute("href")==="#"+e.target.id)});
+    }});
+  },{rootMargin:"-45% 0px -50% 0px"});
+  secs.forEach(function(s){ if(s) so.observe(s) });
+
+  /* reveal list rows once */
+  var ro = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){e.target.classList.add("in"); ro.unobserve(e.target)} });
+  },{threshold:.15});
+  document.querySelectorAll(".rv").forEach(function(n){ro.observe(n)});
+
+  /* canvas helper */
+  function setup(c){
+    var r = c.getBoundingClientRect(), dpr = Math.min(devicePixelRatio||1,2);
+    c.width = r.width*dpr; c.height = r.height*dpr;
+    var g = c.getContext("2d"); g.setTransform(dpr,0,0,dpr,0,0);
+    return {g:g,w:r.width,h:r.height};
+  }
+
+  /* ---- mode shapes (3-span continuous beam: 25m + 27m + 25m) ---- */
+  var bc = document.getElementById("bridge"), B = setup(bc), mode = 1, t0 = performance.now(), visible = true;
+  var spans = [25,27,25], L = 77, sup = [0,25,52,77];
+
+  // Continuous 3-span mode shape approximation enforcing w(0)=w(25)=w(52)=w(77)=0
+  function modeShape(m, u) {
+    var sIdx = u < 25 ? 0 : (u < 52 ? 1 : 2);
+    var u0 = sup[sIdx], sl = spans[sIdx];
+    var xi = (u - u0) / sl; // local span coordinate [0, 1]
+    if (m === 1) {
+      var sgn = sIdx === 1 ? -1.08 : 0.85;
+      return sgn * Math.sin(Math.PI * xi);
+    } else if (m === 2) {
+      if (sIdx === 0) return 0.95 * Math.sin(Math.PI * xi);
+      if (sIdx === 1) return -0.55 * Math.sin(2 * Math.PI * xi);
+      return -0.95 * Math.sin(Math.PI * xi);
+    } else if (m === 3) {
+      if (sIdx === 0) return Math.sin(2 * Math.PI * xi) * 0.75;
+      if (sIdx === 1) return -Math.sin(Math.PI * xi) * 0.95;
+      return -Math.sin(2 * Math.PI * xi) * 0.75;
+    } else {
+      var dir = sIdx === 1 ? -1 : 1;
+      return dir * Math.sin(2 * Math.PI * xi);
+    }
+  }
+
+  function drawBridge(now){
+    var g=B.g, w=B.w, h=B.h, pad=36, x0=pad, x1=w-pad, cy=h*0.42, amp=Math.min(42,h*0.19);
+    g.clearRect(0,0,w,h);
+    var t = reduce ? 0.25 : (now-t0)/1000, om = 2.4 + mode*1.35;
+    var s = reduce ? 1 : Math.sin(om*t);
+    function X(u){return x0+(x1-x0)*u/L}
+
+    /* ground and piers */
+    g.strokeStyle = css("--rule"); g.lineWidth = 1.5;
+    g.beginPath(); g.moveTo(x0-18,h-34); g.lineTo(x1+18,h-34); g.stroke();
+    g.fillStyle = css("--muted");
+    sup.forEach(function(u){
+      var x = X(u);
+      g.beginPath(); g.moveTo(x,cy+2); g.lineTo(x-9,h-34); g.lineTo(x+9,h-34); g.closePath();
+      g.globalAlpha=.25; g.fill(); g.globalAlpha=1;
+    });
+
+    /* undeformed reference */
+    g.setLineDash([4,5]); g.strokeStyle = css("--muted"); g.globalAlpha=.5; g.lineWidth=1;
+    g.beginPath(); g.moveTo(x0,cy); g.lineTo(x1,cy); g.stroke(); g.setLineDash([]); g.globalAlpha=1;
+
+    /* deformed deck */
+    g.strokeStyle = css("--accent"); g.lineWidth = 3.2; g.lineJoin="round"; g.beginPath();
+    for(var i=0;i<=240;i++){
+      var u = L*i/240, y = cy - amp*s*modeShape(mode, u);
+      i ? g.lineTo(X(u),y) : g.moveTo(X(u),y);
+    }
+    g.stroke();
+
+    /* support bearings / pinned nodes at piers */
+    g.fillStyle = css("--accent2");
+    sup.forEach(function(u){
+      g.beginPath(); g.arc(X(u), cy, 3.5, 0, Math.PI*2); g.fill();
+    });
+
+    /* span dimensions */
+    g.fillStyle = css("--muted"); g.font = "12px Inter,sans-serif"; g.textAlign="center";
+    var a=0; spans.forEach(function(sp){ g.fillText(sp+" m", X(a+sp/2), h-12); a+=sp; });
+  }
+  function loopBridge(now){ if(visible) drawBridge(now); if(!reduce) requestAnimationFrame(loopBridge); }
+  requestAnimationFrame(loopBridge); if(reduce) drawBridge(0);
+  new IntersectionObserver(function(e){visible=e[0].isIntersecting}).observe(bc);
+  document.querySelectorAll(".ctl [data-m]").forEach(function(b){
+    b.onclick=function(){
+      mode=+b.dataset.m; t0=performance.now();
+      document.querySelectorAll(".ctl [data-m]").forEach(function(x){x.setAttribute("aria-pressed",x===b)});
+      if(reduce) drawBridge(0);
+    };
+  });
+
+  /* ---- PINN loss curves (synthetic, seeded) ---- */
+  var lc = document.getElementById("loss"), Lc = setup(lc), N = 400;
+  function rng(seed){return function(){seed=(seed*16807)%2147483647;return seed/2147483647}}
+  var rnd = rng(7), data=[], phys=[], tot=[];
+  for(var i=0;i<N;i++){
+    var e=i/N, n1=1+0.18*(rnd()-.5), n2=1+0.25*(rnd()-.5);
+    var d = (2.5*Math.exp(-e*7)+0.02*Math.exp(-e*1.2)+0.0015)*n1;
+    var p = (6*Math.exp(-e*4.5)+0.05*Math.exp(-e*1.5)+0.003)*n2 * (1+0.4*Math.exp(-Math.pow((e-.12)/.03,2)));
+    data.push(d); phys.push(p); tot.push(d+0.5*p);
+  }
+  var prog = reduce ? 1 : 0, startT = 0, lvis=false, lraf=0;
+  function drawLoss(){
+    var g=Lc.g, w=Lc.w, h=Lc.h, l=52, r=14, tp=12, b=34;
+    g.clearRect(0,0,w,h);
+    var lo=Math.log10(5e-4), hi=Math.log10(10);
+    function X(i){return l+(w-l-r)*i/(N-1)}
+    function Y(v){return tp+(h-tp-b)*(1-(Math.log10(v)-lo)/(hi-lo))}
+    g.font="12px Inter,sans-serif"; g.fillStyle=css("--muted"); g.strokeStyle=css("--rule"); g.lineWidth=1;
+    for(var k=-3;k<=1;k++){ var y=Y(Math.pow(10,k)); g.beginPath(); g.moveTo(l,y); g.lineTo(w-r,y); g.stroke(); g.textAlign="right"; g.fillText("1e"+k,l-8,y+4); }
+    g.textAlign="center"; g.fillText("Epoch",(l+w-r)/2,h-8);
+    var cnt = Math.floor(prog*(N-1));
+    [[phys,"--muted",1.5],[data,"--accent2",1.5],[tot,"--accent",2.6]].forEach(function(s){
+      g.strokeStyle=css(s[1]); g.lineWidth=s[2]; g.beginPath();
+      for(var i=0;i<=cnt;i++){ i?g.lineTo(X(i),Y(s[0][i])):g.moveTo(X(i),Y(s[0][i])); }
+      g.stroke();
+    });
+  }
+  function stepLoss(now){
+    if(!startT) startT=now;
+    prog = Math.min(1,(now-startT)/3500); drawLoss();
+    if(prog<1) lraf=requestAnimationFrame(stepLoss);
+  }
+  function playLoss(){ cancelAnimationFrame(lraf); startT=0; prog=0; if(reduce){prog=1;drawLoss();} else lraf=requestAnimationFrame(stepLoss); }
+  new IntersectionObserver(function(e,o){ if(e[0].isIntersecting){playLoss(); o.disconnect();} },{threshold:.4}).observe(lc);
+  document.getElementById("replay").onclick = playLoss;
+  drawLoss();
+
+  /* redraw on resize / theme */
+  var rt; addEventListener("resize",function(){clearTimeout(rt); rt=setTimeout(function(){B=setup(bc);Lc=setup(lc);drawLoss();if(reduce)drawBridge(0)},150)});
+  tb.addEventListener("click",function(){setTimeout(function(){drawLoss();if(reduce)drawBridge(0)},30)});
+})();
+</script>
+<script>
+(function(){
+var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches, root=document.documentElement;
+function css(n){return getComputedStyle(root).getPropertyValue(n).trim()}
+function setup(c){var r=c.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);c.width=r.width*d;c.height=r.height*d;var g=c.getContext("2d");g.setTransform(d,0,0,d,0,0);return{g:g,w:r.width,h:r.height}}
+var NEL=20,LEN=30,EI0=4.2e10,RA=8000,THR=0.98,NM=3,SMAX=0.6;
+
+/* --- small FE + eigen solver (Euler-Bernoulli beam, consistent mass) --- */
+function tr(A,n){var T=new Float64Array(n*n);for(var i=0;i<n;i++)for(var j=0;j<n;j++)T[j*n+i]=A[i*n+j];return T}
+function chol(A,n){var L=new Float64Array(n*n);for(var i=0;i<n;i++)for(var j=0;j<=i;j++){var s=A[i*n+j];for(var k=0;k<j;k++)s-=L[i*n+k]*L[j*n+k];L[i*n+j]=i===j?Math.sqrt(s):s/L[j*n+j]}return L}
+function fsub(L,B,n){var X=new Float64Array(n*n);for(var c=0;c<n;c++)for(var i=0;i<n;i++){var s=B[i*n+c];for(var k=0;k<i;k++)s-=L[i*n+k]*X[k*n+c];X[i*n+c]=s/L[i*n+i]}return X}
+function jacobi(A,n){
+  var V=new Float64Array(n*n),i,j,k;for(i=0;i<n;i++)V[i*n+i]=1;
+  for(var sw=0;sw<40;sw++){
+    var off=0,dg=0;for(i=0;i<n;i++){dg+=A[i*n+i]*A[i*n+i];for(j=i+1;j<n;j++)off+=A[i*n+j]*A[i*n+j]}
+    if(off<1e-24*dg)break;
+    var tol=1e-14*Math.sqrt(dg/n);
+    for(var p=0;p<n-1;p++)for(var q=p+1;q<n;q++){
+      var apq=A[p*n+q];if(Math.abs(apq)<tol)continue;
+      var th=(A[q*n+q]-A[p*n+p])/(2*apq),t=(th>=0?1:-1)/(Math.abs(th)+Math.sqrt(th*th+1)),c=1/Math.sqrt(t*t+1),s=t*c;
+      for(k=0;k<n;k++){var a=A[k*n+p],b=A[k*n+q];A[k*n+p]=c*a-s*b;A[k*n+q]=s*a+c*b}
+      for(k=0;k<n;k++){var a2=A[p*n+k],b2=A[q*n+k];A[p*n+k]=c*a2-s*b2;A[q*n+k]=s*a2+c*b2}
+      for(k=0;k<n;k++){var a3=V[k*n+p],b3=V[k*n+q];V[k*n+p]=c*a3-s*b3;V[k*n+q]=s*a3+c*b3}
+    }
+  }
+  var val=[];for(i=0;i<n;i++)val.push(A[i*n+i]);return{val:val,V:V};
+}
+function zone(e,loc){return e===loc?1:(Math.abs(e-loc)===1?0.5:0)}
+function solve(sev,loc){
+  var l=LEN/NEL,l2=l*l,nt=2*(NEL+1),Kg=new Float64Array(nt*nt),Mg=new Float64Array(nt*nt),i,j;
+  for(var e=0;e<NEL;e++){
+    var a=EI0*(1-sev*zone(e,loc))/(l*l2),b=RA*l/420;
+    var k=[12,6*l,-12,6*l,6*l,4*l2,-6*l,2*l2,-12,-6*l,12,-6*l,6*l,2*l2,-6*l,4*l2];
+    var m=[156,22*l,54,-13*l,22*l,4*l2,13*l,-3*l2,54,13*l,156,-22*l,-13*l,-3*l2,-22*l,4*l2];
+    for(i=0;i<4;i++)for(j=0;j<4;j++){Kg[(2*e+i)*nt+2*e+j]+=a*k[i*4+j];Mg[(2*e+i)*nt+2*e+j]+=b*m[i*4+j]}
+  }
+  var free=[],fi=[];for(i=0;i<nt;i++){if(i===0||i===2*NEL){fi.push(-1)}else{fi.push(free.length);free.push(i)}}
+  var n=free.length,K=new Float64Array(n*n),M=new Float64Array(n*n);
+  for(i=0;i<n;i++)for(j=0;j<n;j++){K[i*n+j]=Kg[free[i]*nt+free[j]];M[i*n+j]=Mg[free[i]*nt+free[j]]}
+  var L=chol(M,n),A=fsub(L,tr(fsub(L,K,n),n),n);
+  for(i=0;i<n;i++)for(j=i+1;j<n;j++){var v=(A[i*n+j]+A[j*n+i])/2;A[i*n+j]=A[j*n+i]=v}
+  var R=jacobi(A,n),idx=R.val.map(function(_,i){return i}).sort(function(x,y){return R.val[x]-R.val[y]});
+  var f=[],phi=[],rot=[],Mn=[];
+  for(var q=0;q<NM;q++){
+    var col=idx[q],ph=new Float64Array(n);
+    for(i=n-1;i>=0;i--){var s=R.V[i*n+col];for(var kk=i+1;kk<n;kk++)s-=L[kk*n+i]*ph[kk];ph[i]=s/L[i*n+i]}
+    var w=[],mx=0;for(i=0;i<=NEL;i++){var x=fi[2*i]<0?0:ph[fi[2*i]];w.push(x);mx=Math.max(mx,Math.abs(x))}
+    var sg=w[Math.round(NEL/(2*(q+1)))]<0?-1:1;
+    var mn=0,th=[];for(i=0;i<n;i++)for(j=0;j<n;j++)mn+=ph[i]*M[i*n+j]*ph[j];
+    for(i=0;i<=NEL;i++)th.push(fi[2*i+1]<0?0:ph[fi[2*i+1]]);
+    phi.push(w.map(function(x){return sg*x/mx}));rot.push(th.map(function(x){return sg*x/mx}));Mn.push(mn/(mx*mx));
+    f.push(Math.sqrt(R.val[col])/(2*Math.PI));
+  }
+  return{f:f,phi:phi,rot:rot,Mn:Mn};
+}
+
+/* --- vehicle pass: moving force, modal superposition, Newmark integration --- */
+var P=150e3,ZETA=0.02,FS=200,TAIL=8,NFFT=8192,l0=LEN/NEL,XS=LEN/4;
+function modeAt(S,k,x){var e=Math.min(NEL-1,Math.max(0,Math.floor(x/l0))),xi=x/l0-e,w=S.phi[k],r=S.rot[k],x2=xi*xi,x3=x2*xi;
+  return(1-3*x2+2*x3)*w[e]+(xi-2*x2+x3)*l0*r[e]+(3*x2-2*x3)*w[e+1]+(x3-x2)*l0*r[e+1]}
+function simulate(S,v){
+  var SUB=8,Tc=LEN/v,N=Math.floor((Tc+TAIL)*FS),dt=1/(FS*SUB),b=0.25,g=0.5,a=new Float64Array(N),q=[];
+  for(var k=0;k<NM;k++){
+    var om=2*Math.PI*S.f[k],c=2*ZETA*om,kh=om*om+g/(b*dt)*c+1/(b*dt*dt),qs=new Float64Array(N),qq=0,vv=0,aa=0,xs=modeAt(S,k,XS);
+    for(var n=0;n<N*SUB;n++){
+      if(n%SUB===0){qs[n/SUB]=qq;a[n/SUB]+=xs*aa}
+      var t=(n+1)*dt,F=t<Tc?P*modeAt(S,k,v*t)/S.Mn[k]:0;
+      var rhs=F+(qq/(b*dt*dt)+vv/(b*dt)+(1/(2*b)-1)*aa)+c*(g/(b*dt)*qq+(g/b-1)*vv+dt*(g/(2*b)-1)*aa);
+      var qn=rhs/kh,an=(qn-qq)/(b*dt*dt)-vv/(b*dt)-(1/(2*b)-1)*aa,vn=vv+dt*((1-g)*aa+g*an);
+      qq=qn;vv=vn;aa=an;
+    }
+    q.push(qs);
+  }
+  return{a:a,q:q,N:N,Tc:Tc};
+}
+function fft(re,im){
+  var n=re.length,i,j=0,k,t;
+  for(i=1;i<n;i++){var bit=n>>1;for(;j&bit;bit>>=1)j^=bit;j^=bit;if(i<j){t=re[i];re[i]=re[j];re[j]=t;t=im[i];im[i]=im[j];im[j]=t}}
+  for(var len=2;len<=n;len<<=1){
+    var ang=-2*Math.PI/len,wr=Math.cos(ang),wi=Math.sin(ang),h=len/2;
+    for(i=0;i<n;i+=len){var cr=1,ci=0;
+      for(k=0;k<h;k++){
+        var ur=re[i+k],ui=im[i+k],xr=re[i+k+h],xi=im[i+k+h],vr=xr*cr-xi*ci,vi=xr*ci+xi*cr;
+        re[i+k]=ur+vr;im[i+k]=ui+vi;re[i+k+h]=ur-vr;im[i+k+h]=ui-vi;
+        var nr=cr*wr-ci*wi;ci=cr*wi+ci*wr;cr=nr;
+      }}
+  }
+}
+function spectrum(a){
+  var N=a.length,re=new Float64Array(NFFT),im=new Float64Array(NFFT),m=new Float64Array(NFFT/2),i;
+  for(i=0;i<N;i++)re[i]=a[i]*(0.5-0.5*Math.cos(2*Math.PI*i/(N-1)));
+  fft(re,im);for(i=0;i<NFFT/2;i++)m[i]=Math.hypot(re[i],im[i]);return m;
+}
+function pick(m,f0){
+  var df=FS/NFFT,lo=Math.floor(0.85*f0/df),hi=Math.ceil(1.05*f0/df),k=lo,i;
+  for(i=lo;i<=hi;i++)if(m[i]>m[k])k=i;
+  var a=Math.log(m[k-1]+1e-12),b=Math.log(m[k]+1e-12),c=Math.log(m[k+1]+1e-12),d=a-2*b+c;
+  var fl=Float64Array.from(m).sort()[m.length>>1];
+  return[(k+(d?0.5*(a-c)/d:0))*df,(k===lo||k===hi)?0:m[k]/(fl+1e-12)];
+}
+
+/* --- state --- */
+var $=function(id){return document.getElementById(id)};
+var Fc=setup($("fem")),Hc=setup($("hi")),Ac=setup($("acc")),Sc=setup($("spec"));
+var st={sev:0,loc:10,mode:1,v:15,sn:5},H=solve(0,10),D=H,curve=[],minv=1,dirty=2,wasTrig=false,vis=true,running=false;
+var play={on:false,t:0,t0:0},baseSim=null,cur=null,meas=new Float64Array(2),spD=null,fidNow=[0,0,0],hiNow=[1,1,1],okNow=[true,true,true];
+function buildCurve(){curve=[];minv=1;for(var s=0;s<=SMAX+1e-9;s+=0.05){var r=solve(s,st.loc),h=r.f.map(function(f,i){return f/H.f[i]});h.forEach(function(x){minv=Math.min(minv,x)});curve.push([s,h])}}
+function randn(){return(Math.random()+Math.random()+Math.random()-1.5)*2}
+
+/* --- drawing --- */
+function drawFem(now){
+  var g=Fc.g,w=Fc.w,h=Fc.h,x0=34,x1=w-34,cy=h*0.38,amp=Math.min(44,h*0.18),m=st.mode-1,e,i,k;
+  g.clearRect(0,0,w,h);
+  function X(i){return x0+(x1-x0)*i/NEL}
+  g.fillStyle=css("--muted");g.globalAlpha=.3;
+  [x0,x1].forEach(function(x){g.beginPath();g.moveTo(x,cy+5);g.lineTo(x-9,cy+34);g.lineTo(x+9,cy+34);g.closePath();g.fill()});
+  g.globalAlpha=1;
+  var dH=[],dD=[],pl=play.on&&cur&&baseSim;
+  if(pl){
+    var ix=Math.min(cur.N-1,Math.floor(play.t*FS));
+    for(i=0;i<=NEL;i++){var a1=0,a2=0;for(k=0;k<NM;k++){a1+=baseSim.s.q[k][ix]*H.phi[k][i];a2+=cur.q[k][ix]*D.phi[k][i]}dH.push(a1*baseSim.dscale);dD.push(a2*baseSim.dscale)}
+  }else{
+    var t=reduce?0:now/1000,f1=H.f[0];
+    var sH=reduce?1:Math.sin(2*Math.PI*0.35*(H.f[m]/f1)*t),sD=reduce?1:Math.sin(2*Math.PI*0.35*(D.f[m]/f1)*t);
+    for(i=0;i<=NEL;i++){dH.push(sH*H.phi[m][i]);dD.push(sD*D.phi[m][i])}
+  }
+  g.setLineDash([4,5]);g.strokeStyle=css("--muted");g.lineWidth=1.2;g.globalAlpha=.7;g.beginPath();
+  for(i=0;i<=NEL;i++){var y=cy-amp*dH[i];i?g.lineTo(X(i),y):g.moveTo(X(i),y)}
+  g.stroke();g.setLineDash([]);g.globalAlpha=1;
+  g.lineCap="round";
+  for(e=0;e<NEL;e++){
+    var d=zone(e,st.loc)*st.sev>0;
+    g.strokeStyle=d?css("--accent2"):css("--accent");g.lineWidth=d?5:3.5;g.beginPath();
+    g.moveTo(X(e),cy-amp*dD[e]);g.lineTo(X(e+1),cy-amp*dD[e+1]);g.stroke();
+  }
+  /* sensor */
+  var si=st.sn;g.fillStyle=css("--accent2");g.beginPath();g.arc(X(si),cy-amp*dD[si],4.5,0,7);g.fill();
+  g.fillStyle=css("--muted");g.font="12px Inter,sans-serif";g.textAlign="center";g.fillText("sensor",X(si),cy+22);
+  /* vehicle */
+  if(pl&&play.t<cur.Tc){
+    var u=st.v*play.t/LEN*NEL,ie=Math.min(NEL-1,Math.floor(u)),fr=u-ie,yv=cy-amp*(dD[ie]*(1-fr)+dD[ie+1]*fr)-12,xv=X(u);
+    g.fillStyle=css("--ink");g.globalAlpha=.85;g.fillRect(xv-14,yv-9,28,9);g.fillRect(xv-6,yv-15,12,6);
+    g.beginPath();g.arc(xv-8,yv+1,3.2,0,7);g.arc(xv+8,yv+1,3.2,0,7);g.fill();g.globalAlpha=1;
+  }
+  var by=h-34;
+  for(e=0;e<NEL;e++){
+    var dd=zone(e,st.loc)*st.sev/SMAX;
+    g.fillStyle=css("--muted");g.globalAlpha=.16;g.fillRect(X(e)+1,by,(x1-x0)/NEL-2,12);
+    if(dd>0){g.fillStyle=css("--accent2");g.globalAlpha=.2+.8*dd;g.fillRect(X(e)+1,by,(x1-x0)/NEL-2,12)}
+  }
+  g.globalAlpha=1;g.fillStyle=css("--muted");g.textAlign="left";
+  g.fillText(pl?"Vehicle pass, deflection exaggerated. Dashed line: healthy girder.":"Stiffness map of the 20 elements (click to place damage). Dashed line: healthy girder.",x0,h-8);
+}
+function drawAcc(){
+  var g=Ac.g,w=Ac.w,h=Ac.h,l=48,r=14,tp=18,b=26,N=meas.length,T=N/FS,i;g.clearRect(0,0,w,h);
+  var mx=1e-6;for(i=0;i<N;i++)mx=Math.max(mx,Math.abs(meas[i]));mx*=1.1;
+  function X(t){return l+(w-l-r)*t/T}function Y(v){return tp+(h-tp-b)*(0.5-0.5*v/mx)}
+  g.fillStyle=css("--accent");g.globalAlpha=.07;g.fillRect(l,tp,X(cur?cur.Tc:0)-l,h-tp-b);g.globalAlpha=1;
+  g.font="12px Inter,sans-serif";g.fillStyle=css("--muted");g.strokeStyle=css("--rule");g.lineWidth=1;g.textAlign="right";
+  [mx,0,-mx].forEach(function(v){g.beginPath();g.moveTo(l,Y(v));g.lineTo(w-r,Y(v));g.stroke();g.fillText(v.toFixed(2),l-8,Y(v)+4)});
+  g.textAlign="center";for(var s=0;s<=T;s+=2)g.fillText(s+" s",X(s),h-8);
+  g.textAlign="left";g.fillText("Acceleration at the sensor, m/s². Shaded: vehicle on the girder.",l,11);
+  var last=play.on?Math.min(N-1,Math.floor(play.t*FS)):N-1;
+  g.strokeStyle=css("--accent");g.lineWidth=1.3;g.beginPath();
+  for(i=0;i<=last;i++){i?g.lineTo(X(i/FS),Y(meas[i])):g.moveTo(X(0),Y(meas[0]))}
+  g.stroke();
+  if(play.on){g.strokeStyle=css("--accent2");g.beginPath();g.moveTo(X(play.t),tp);g.lineTo(X(play.t),h-b);g.stroke()}
+}
+function drawSpec(){
+  var g=Sc.g,w=Sc.w,h=Sc.h,l=48,r=14,tp=22,b=28,k=st.mode-1,df=FS/NFFT,f0=H.f[k],fa=0.85*f0,fb=1.08*f0,ia=Math.floor(fa/df),ib=Math.ceil(fb/df),mx=1e-9,i;
+  g.clearRect(0,0,w,h);
+  for(i=ia;i<=ib;i++)mx=Math.max(mx,baseSim.sp[i],spD[i]);mx*=1.08;
+  function X(f){return l+(w-l-r)*(f-fa)/(fb-fa)}function Y(v){return tp+(h-tp-b)*(1-v/mx)}
+  g.font="12px Inter,sans-serif";g.fillStyle=css("--muted");g.strokeStyle=css("--rule");g.lineWidth=1;g.textAlign="center";
+  for(i=0;i<=4;i++){var f=fa+(fb-fa)*i/4;g.beginPath();g.moveTo(X(f),tp);g.lineTo(X(f),h-b);g.stroke();g.fillText(f.toFixed(2)+" Hz",X(f),h-10)}
+  g.textAlign="left";g.fillText("Spectrum around mode "+(k+1)+": baseline "+baseSim.fid[k].toFixed(2)+" Hz, now "+fidNow[k].toFixed(2)+" Hz",l,12);
+  function line(sp,col,dash,lw){g.setLineDash(dash);g.strokeStyle=css(col);g.lineWidth=lw;g.beginPath();
+    for(var j=ia;j<=ib;j++){var xx=X(j*df),yy=Y(sp[j]);j===ia?g.moveTo(xx,yy):g.lineTo(xx,yy)}g.stroke();g.setLineDash([])}
+  line(baseSim.sp,"--muted",[4,4],1.4);line(spD,"--accent",[],2.2);
+  g.strokeStyle=css("--muted");g.setLineDash([3,4]);g.beginPath();g.moveTo(X(baseSim.fid[k]),tp);g.lineTo(X(baseSim.fid[k]),h-b);g.stroke();
+  g.strokeStyle=css("--accent2");g.setLineDash([]);g.lineWidth=1.5;g.beginPath();g.moveTo(X(fidNow[k]),tp);g.lineTo(X(fidNow[k]),h-b);g.stroke();
+}
+function drawHI(){
+  var g=Hc.g,w=Hc.w,h=Hc.h,l=48,r=14,tp=10,b=34;g.clearRect(0,0,w,h);
+  var lo=Math.min(0.97,minv-0.004),hi=1.003;
+  function X(s){return l+(w-l-r)*s/SMAX}function Y(v){return tp+(h-tp-b)*(1-(v-lo)/(hi-lo))}
+  g.fillStyle=css("--accent2");g.globalAlpha=.08;g.fillRect(l,Y(THR),w-l-r,h-b-Y(THR));g.globalAlpha=1;
+  g.font="12px Inter,sans-serif";g.fillStyle=css("--muted");g.strokeStyle=css("--rule");g.lineWidth=1;g.textAlign="right";
+  for(var v=1;v>=lo;v-=0.02){g.beginPath();g.moveTo(l,Y(v));g.lineTo(w-r,Y(v));g.stroke();g.fillText(v.toFixed(2),l-8,Y(v)+4)}
+  g.textAlign="center";
+  for(var s=0;s<=SMAX+1e-9;s+=0.2)g.fillText(Math.round(s*100)+" %",X(s),h-16);
+  g.fillText("Stiffness loss in damaged zone",(l+w-r)/2,h-2);
+  g.setLineDash([5,4]);g.strokeStyle=css("--accent2");g.beginPath();g.moveTo(l,Y(THR));g.lineTo(w-r,Y(THR));g.stroke();g.setLineDash([]);
+  g.fillStyle=css("--accent2");g.textAlign="left";g.fillText("alert threshold 0.98",l+6,Y(THR)+14);
+  var cols=["--accent","--accent2","--muted"];
+  for(var k=0;k<NM;k++){
+    g.strokeStyle=css(cols[k]);g.lineWidth=2.2;g.beginPath();
+    curve.forEach(function(c,i){i?g.lineTo(X(c[0]),Y(c[1][k])):g.moveTo(X(c[0]),Y(c[1][k]))});g.stroke();
+  }
+  g.strokeStyle=css("--muted");g.lineWidth=1;g.beginPath();g.moveTo(X(st.sev),tp);g.lineTo(X(st.sev),h-b);g.stroke();
+  for(k=0;k<NM;k++){if(!okNow[k])continue;g.fillStyle=css(cols[k]);g.beginPath();g.arc(X(st.sev),Y(hiNow[k]),4,0,7);g.fill()}
+}
+
+/* --- readouts + trigger --- */
+function refresh(){
+  D=solve(st.sev,st.loc);var n,k;
+  if(!baseSim||baseSim.v!==st.v||baseSim.sn!==st.sn){
+    var s0=simulate(H,st.v),sp0=spectrum(s0.a),m0=1e-9;
+    for(n=0;n<s0.N;n++){var w0=0;for(k=0;k<NM;k++)w0+=s0.q[k][n]*H.phi[k][NEL/2];m0=Math.max(m0,Math.abs(w0))}
+    var pb=H.f.map(function(f){return pick(sp0,f)});
+    baseSim={v:st.v,sn:st.sn,s:s0,sp:sp0,fid:pb.map(function(p){return p[0]}),ok:pb.map(function(p){return p[1]>=4}),dscale:1/m0};
+  }
+  cur=simulate(D,st.v);meas=cur.a;
+  if($("noise").checked){var ma=1e-9;for(n=0;n<meas.length;n++)ma=Math.max(ma,Math.abs(meas[n]));meas=new Float64Array(meas);for(n=0;n<meas.length;n++)meas[n]+=0.01*ma*randn()}
+  spD=spectrum(meas);
+  var pk=H.f.map(function(f){return pick(spD,f)}),ok=pk.map(function(p,i){return p[1]>=4&&baseSim.ok[i]});
+  fidNow=pk.map(function(p){return p[0]});okNow=ok;
+  hiNow=fidNow.map(function(f,i){return ok[i]?f/baseSim.fid[i]:NaN});
+  var html="<b></b><b>Baseline</b><b>From vehicle pass</b><b>Health index</b>",trig=false,drop=[];
+  for(k=0;k<NM;k++){
+    var lo=ok[k]&&hiNow[k]<THR;trig=trig||lo;drop.push(ok[k]?1-hiNow[k]:0);
+    html+="<span>Mode "+(k+1)+"</span><span>"+baseSim.fid[k].toFixed(2)+" Hz</span><span>"+(ok[k]?fidNow[k].toFixed(2)+" Hz":"not found")+"</span><span class='"+(lo?"lo":"")+"'>"+(ok[k]?hiNow[k].toFixed(3):"weak peak")+"</span>";
+  }
+  $("read").innerHTML=html;
+  var bd=$("badge");bd.textContent=trig?"Alert: damage indicated":"Healthy";bd.classList.toggle("alert",trig);
+  if(trig&&!wasTrig){bd.classList.remove("pulse");void bd.offsetWidth;bd.classList.add("pulse")}
+  wasTrig=trig;
+  var mx=Math.max.apply(null,drop),best=drop.indexOf(mx),msg;
+  if(st.sev<0.001)msg="Raise the stiffness loss, or press Run progression, and watch the indices fall.";
+  else{
+    msg="At this location mode "+(best+1)+" reacts most.";
+    for(k=0;k<NM;k++)if(drop[k]<0.25*mx&&mx>0.002){msg+=" Mode "+(k+1)+" barely changes: the damage sits near one of its nodes.";break}
+  }
+  for(k=0;k<NM;k++)if(!ok[k]){msg+=" Mode "+(k+1)+" is not identified from this sensor position: it sits near a node of that mode.";break}
+  $("insight").textContent=msg;$("sevo").textContent=Math.round(st.sev*100)+" %";
+  drawHI();drawAcc();drawSpec();if(reduce)drawFem(0);
+}
+function frame(now){
+  if(play.on){
+    play.t=(now-play.t0)/1000;
+    if(play.t>=cur.N/FS){play.on=false;$("drive").textContent="Drive vehicle across";dirty=Math.max(dirty,1)}else drawAcc();
+  }
+  if(dirty){var c=dirty===2;dirty=0;if(c)buildCurve();refresh()}
+  if(vis&&(!reduce||play.on))drawFem(now);
+  requestAnimationFrame(frame);
+}
+
+/* --- controls --- */
+$("loc").oninput=function(){st.loc=+this.value;dirty=2};
+$("sev").oninput=function(){st.sev=this.value/100;dirty=Math.max(dirty,1)};
+$("noise").onchange=function(){dirty=Math.max(dirty,1)};
+setInterval(function(){if($("noise").checked&&!play.on)dirty=Math.max(dirty,1)},800);
+function stopDrive(){if(play.on){play.on=false;$("drive").textContent="Drive vehicle across"}}
+$("snr").oninput=function(){st.sn=+this.value;XS=st.sn*l0;$("snro").textContent=XS.toFixed(1)+" m";stopDrive();dirty=Math.max(dirty,1)};
+$("spd").oninput=function(){st.v=+this.value;$("spdo").textContent=st.v+" m/s";play.on=false;$("drive").textContent="Drive vehicle across";dirty=Math.max(dirty,1)};
+$("drive").onclick=function(){
+  if(play.on){play.on=false;this.textContent="Drive vehicle across";dirty=Math.max(dirty,1);return}
+  if(!cur)return;play.on=true;play.t=0;play.t0=performance.now();this.textContent="Stop";
+};
+document.querySelectorAll("[data-fm]").forEach(function(b){b.onclick=function(){
+  st.mode=+b.dataset.fm;document.querySelectorAll("[data-fm]").forEach(function(x){x.setAttribute("aria-pressed",x===b)});dirty=Math.max(dirty,1)}});
+$("fem").addEventListener("pointerdown",function(ev){
+  var r=this.getBoundingClientRect(),i=Math.floor(((ev.clientX-r.left-34)/(r.width-68))*NEL);
+  st.loc=Math.max(1,Math.min(18,i));$("loc").value=st.loc;dirty=2});
+var runT=0;
+function stopRun(){running=false;$("run").textContent="Run progression"}
+$("run").onclick=function(){
+  if(running){stopRun();return}
+  running=true;this.textContent="Stop";runT=0;
+  (function step(now){
+    if(!running)return;if(!runT)runT=now;
+    var p=Math.min(1,(now-runT)/7000);st.sev=Math.round(p*SMAX*1000)/1000;$("sev").value=Math.round(st.sev*100);dirty=Math.max(dirty,1);
+    if(p<1)requestAnimationFrame(step);else stopRun();
+  })(performance.now());
+};
+$("rst").onclick=function(){stopRun();st.sev=0;$("sev").value=0;dirty=Math.max(dirty,1)};
+new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe($("fem"));
+$("theme").addEventListener("click",function(){setTimeout(function(){dirty=Math.max(dirty,1)},30)});
+var rt;addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(function(){Fc=setup($("fem"));Hc=setup($("hi"));Ac=setup($("acc"));Sc=setup($("spec"));dirty=Math.max(dirty,1)},150)});
+requestAnimationFrame(frame);
+})();
+</script>
+<script>
+/* ---- YouTube section ----
+   Fill ONE of these in. The section stays hidden until you do.
+   channelId : starts with UC (YouTube Studio > Settings > Channel > Advanced settings)
+   playlistId: starts with PL, if you prefer a specific playlist
+   handle    : optional, used only for the "Open the channel" link, e.g. "@yourname"   */
+(function(){
+var YT={channelId:"UCL4LC4gUM58W3Wn9I9Wv4Ng",playlistId:"",handle:""};
+var list=YT.playlistId||(/^UC[\w-]{22}$/.test(YT.channelId)?"UU"+YT.channelId.slice(2):"");
+if(!list)return;
+var sec=document.getElementById("videos"),box=document.getElementById("vidbox");
+sec.hidden=false;document.getElementById("navvid").hidden=false;
+document.getElementById("vidlink").href=YT.handle?"https://www.youtube.com/"+(YT.handle[0]==="@"?"":"@")+YT.handle:(YT.channelId?"https://www.youtube.com/channel/"+YT.channelId:"https://www.youtube.com/playlist?list="+YT.playlistId);
+function load(){
+  var f=document.createElement("iframe");
+  f.src="https://www.youtube-nocookie.com/embed/videoseries?list="+encodeURIComponent(list)+"&rel=0";
+  f.title="Gajendra Yadav on YouTube";f.loading="lazy";f.allowFullscreen=true;
+  f.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  f.referrerPolicy="strict-origin-when-cross-origin";
+  box.appendChild(f);
+}
+new IntersectionObserver(function(e,o){if(e[0].isIntersecting){load();o.disconnect()}},{rootMargin:"300px"}).observe(box);
+})();
+</script>
+</body>
+</html>
